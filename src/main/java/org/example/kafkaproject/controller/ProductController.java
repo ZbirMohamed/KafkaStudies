@@ -19,12 +19,11 @@ public class ProductController {
     }
     private StreamBridge streamBridge;
 
-
     //par default kafka encode les messages sous format json, on peut bien les encoder comme l'on veut
     @GetMapping("/publish/{topic}")
     public Product publish(@PathVariable String topic){
         Product p1 = new Product("1","p1",12f,new Date());
-        streamBridge.send(topic,p1);
+        streamBridge.send(topic,p1); // c'est la fonction d'envoi generique cree par spring cloud pour nous permettre l'envoi des donnes via n'importe quel messages broker
         return p1;
     }
 }
